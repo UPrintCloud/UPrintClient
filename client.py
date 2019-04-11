@@ -4,6 +4,7 @@ import config
 
 
 def make_print(path):
+    print('save file at %s' % path)
     pass
 
 
@@ -27,7 +28,7 @@ def listen(uri, username, password, queue_name):
     channel.queue_declare(queue=queue_name, durable=True)
     channel.basic_qos(prefetch_count=1)
     channel.basic_consume(
-        call_back,
+        on_message_callback=call_back,
         queue=queue_name
     )
     channel.start_consuming()
